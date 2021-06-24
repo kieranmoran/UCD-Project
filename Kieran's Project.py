@@ -1,14 +1,23 @@
 import pandas as pd
 
-data=pd.read_csv('gdp_csv.csv')
+data = pd.read_csv('gdp_csv.csv')
 
-print(data.info())
-print(data.shape)
-print(data.describe())
-print(data.describe().transpose())
-print(data.head())
-print(data.tail())
+#make a copy of the data
+df = data.copy()
 
+print(df.info())
+print(df.shape)
+print(df.describe())
+print(df.describe().transpose())
+print(df.head())
+print(df.tail())
+
+#checking if there are some missing values
+print(df.isnull().sum())
+
+df["Country Name"].unique()
+
+df.types 
 
 
 
