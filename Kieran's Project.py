@@ -28,6 +28,29 @@ print(stocks.sort_values("TURNOVER"))
 print(stocks.head(20))
 
 
+#Dataset - Bank customer
+
+Bank_Customers = pd.read_csv("data.csv")
+
+print(df.head())
+
+#Creating a list in python
+
+job = ["admin", "technican", "management", "blue_collar", "services", "student", "self_employed", "housemaid", "retired", "un_employed", "entrepreneur"]
+
+
+Martial_Status = ["single", "married", "divorced"]
+#I want to subset the jobs were people arent working
+jobs_subset = job[8:10]
+print(jobs_subset)
+
+max_age =
+
+
+Bank_Customers = pd.read_csv("")
+
+
+
 
 
 
