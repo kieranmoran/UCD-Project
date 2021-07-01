@@ -27,6 +27,9 @@ print(stocks.dropna())
 print(stocks.sort_values("TURNOVER"))
 print(stocks.head(20))
 
+stocks['DATE']=pd.to_datetime(stocks['DATE'])
+
+
 
 #Dataset - Bank customer
 
@@ -34,50 +37,42 @@ Bank_Customers = pd.read_csv("data.csv")
 
 print(df.head())
 #Count missing values in each column
-missing_values_count = netflix_data.isnull().sum()
+missing_values_count = data.isnull().sum()
 print(missing_values_count[0:5])
 
 #Drop rows where data is missing
-droprows= netflix_data.dropna()
-print(netflix_data.shape,droprows.shape)
+droprows= data.dropna()
+print(data.shape,droprows.shape)
 #Drop Colunm where data is missing
-dropcolumns = netflix_data.dropna(axis=1)
-print(netflix_data.shape,dropcolumns.shape)
+dropcolumns = data.dropna(axis=1)
+print(data.shape,dropcolumns.shape)
 
 #Fill All missing values with 0
-cleaned_data = netflix_data.fillna(0)
+cleaned_data = data.fillna(0)
 #Fill all missing values to the value that comes next in the same column
-cleaned_data = netflix_data.fillna(method='bfill', axis=0).fillna(0)
+cleaned_data = data.fillna(method='bfill', axis=0).fillna(0)
 
 #Drop rows where data is missing
-droprows= netflix_data.dropna()
-print(netflix_data.shape,droprows.shape)
+droprows= data.dropna()
+print(data.shape,droprows.shape)
 
 #Drop Columns where data is missing
-dropcolumns = netflix_data.dropna(axis=1)
-print(netflix_data.shape,dropcolumns.shape)
+dropcolumns = data.dropna(axis=1)
+print(data.shape,dropcolumns.shape)
 #Fill all missing values with 0
-cleaned_data = netflix_data.fillna(0)
+cleaned_data = data.fillna(0)
 
 #Fill all missing values to the value that comes next in the same column
-cleaned_data = netflix_data.fillna(method='bfill', axis=0).fillna(0)
+cleaned_data = data.fillna(method='bfill', axis=0).fillna(0)
 #Fill all missing values to the value that comes next in the same column
-cleaned_data = netflix_data.fillna(method='bfill', axis=0).fillna(0)
+cleaned_data = data.fillna(method='bfill', axis=0).fillna(0)
 
 #Drop all rows that are duplicates
-drop_duplicates= netflix_data.drop_duplicates()
-print(netflix_data.shape,drop_duplicates.shape)
+drop_duplicates= data.drop_duplicates()
+print(data.shape,drop_duplicates.shape)
 #Drop Duplicate Rows based on specific columns
-drop_duplicates= netflix_data.drop_duplicates(subset=['show_id'])
-print(netflix_data.shape,drop_duplicates.shape)
 
-
-
-
-
-
-
-
+print(data.shape,drop_duplicates.shape)
 
 
 #Creating a list in python
@@ -86,12 +81,9 @@ job = ["admin", "technican", "management", "blue_collar", "services", "student",
 Martial_Status = ["single", "married", "divorced"]
 
 
-
 #I want to subset the jobs were people arent working
 jobs_subset = job[8:10]
 print(jobs_subset)
-
-
 
 
 #New Dataset
