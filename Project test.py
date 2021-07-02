@@ -77,9 +77,60 @@ df.columns = ["Date", "Open", "High", "Low", "Close", "Volume"]
 df.plot(x='Date', y='Close', rot=90, title="Microsoft Stock Price")
 plt.show()
 
-
 #Histogram plot is a great way to see the distribution of values.
 df.plot(x='Date', y='Volume', kind='hist', rot=90, title="Microsoft Stock Price")
 plt.show()
+
+#Sorting - Bank Customer Data
+
+import pandas as pd
+Customer_Data = pd.read_csv("data.csv")
+print(Customer_Data.head())
+print(Customer_Data.shape)
+#Print the row index of Bank Customer Data
+print(Customer_Data.index)
+# Print the column index of homelessness
+print(Customer_Data.columns)
+
+#Index Customer Data by job
+Customer_Data_Ind = Customer_Data.set_index(("job"))
+print(Customer_Data_Ind)
+# Reset the index, keeping its contents
+print(Customer_Data_Ind.reset_index())
+# Reset the index, dropping its contents
+print(Customer_Data_Ind.reset_index(drop=True))
+
+
+
+print(Customer_Data.sort_values("marital"))
+#Sort in Descending order
+print(Customer_Data.sort_values("age", ascending=False))
+# Sort Customer Data by age, then descending Martial Status
+Customer_Data_Age = Customer_Data.sort_values(["age", "marital"], ascending=[True, False])
+print(Customer_Data_Age.head())
+
+#Subsetting just the Education Column
+print(Customer_Data["education"])
+
+#Dropping Duplicates
+import pandas as pd
+Employee_Details = pd.read_csv("current-employee-names-salaries-and-position-titles-1.csv")
+
+print(Employee_Details)
+#checking if there are some missing values
+print(Employee_Details.isnull().sum())
+print(Employee_Details.drop_duplicates(subset="Name"))
+Job_titles = Employee_Details.drop_duplicates(subset=["Name", "Department"])
+print(Job_titles.head())
+
+#Grouped Summaries
+
+Employee_Details_Dept = Employee_Details.groupby("Job Titles")["Typical Hours"].sum()
+print(Employee_Details_Dept)
+
+Employee_Details_Multiple = Employee_Details.groupby(["Job Titles", "Department"])["Typical Hours"].sum()
+print(Employee_Details_Multiple)
+
+
 
 
