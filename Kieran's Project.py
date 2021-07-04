@@ -2,7 +2,6 @@ import pandas as pd
 
 data = pd.read_csv('gdp_csv.csv')
 
-
 #make a copy of the data
 df = data.copy()
 
@@ -73,17 +72,6 @@ print(data.shape,drop_duplicates.shape)
 #Drop Duplicate Rows based on specific columns
 
 print(data.shape,drop_duplicates.shape)
-
-
-#Creating a list in python
-
-job = ["admin", "technican", "management", "blue_collar", "services", "student", "self_employed", "housemaid", "retired", "un_employed", "entrepreneur"]
-Martial_Status = ["single", "married", "divorced"]
-
-
-#I want to subset the jobs were people arent working
-jobs_subset = job[8:10]
-print(jobs_subset)
 
 
 #New Dataset
