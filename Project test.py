@@ -115,13 +115,25 @@ print(Customer_Data["education"])
 #Dropping Duplicates
 import pandas as pd
 Employee_Details = pd.read_csv("current-employee-names-salaries-and-position-titles-1.csv")
-
-print(Employee_Details)
-#checking if there are some missing values
+#Checking info, to see if there missing
+print(Employee_Details.info())
+#checking if there are some missing values - Is isnull sum is a function sums missing values
 print(Employee_Details.isnull().sum())
+
+#Drop Columns instead of rows use the axis 1 -
+Missing_Value = Employee_Details.dropna(axis=1)
+print(Employee_Details.shape,Missing_Value.shape)
+print(Employee_Details.shape,Missing_Value.shape)
+
 print(Employee_Details.drop_duplicates(subset="Name"))
 Job_titles = Employee_Details.drop_duplicates(subset=["Name", "Department"])
 print(Job_titles.head())
+
+#If i wanted to fill the missing values i would use the following code -
+Missing_Value = Employee_Details.fillna(Missing_Value.mean)
+#bfill is backword value, fill all missing values to the value that comes next in the same column
+Missing_Value = Employee_Details.fillna(method="bfill", axis=None).fillna(0)
+
 
 #Grouped Summaries
 

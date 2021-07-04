@@ -1,105 +1,147 @@
+from datetime import datetime
+
 import pandas as pd
+from matplotlib import pyplot as plt
 
-data = pd.read_csv('gdp_csv.csv')
+# Date and time now
+import datetime
+now = datetime.datetime.now()
+print(now)
 
-#make a copy of the data
-df = data.copy()
+GDP_Data = pd.read_csv('gdp_csv.csv')
 
-print(df.info())
-print(df.shape)
-print(df.describe())
-print(df.describe().transpose())
-print(df.head())
-print(df.tail())
+print(GDP_Data.head)
+print(GDP_Data.tail)
 
-#checking if there are some missing values
-print(df.isnull().sum())
+#Listing all the countries and regions
+print(GDP_Data["Country Name"].unique())
+print(GDP_Data["Country Name"].nunique(5))
 
-#Dataframe -Stocks
-stocks = pd.read_csv("NSE_BANKING_SECTOR.csv")
+#For Ireland
+Ireland = GDP_Data[GDP_Data['Country Name']=='Ireland']
+print(Ireland)
+#Shape
+print(GDP_Data.shape)
 
-print(stocks.info)
+Ireland.plot(x="Year", y="Value", kind="line")
+plt.show()
+
+#Creating Lists
+Countries_I = ["Iceland", "India", "Indonesia", "Iran", "Islamic Rep", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy"]
+Countries_I_GDP_Data = GDP_Data[GDP_Data["Value"].isin(GDP_Data)]
+print(len(Countries_I_GDP_Data))
+
+# Use slicing on list names
+#Subsetting Indonesia
+Countries_I_Subset= Countries_I[2:3]
+print(Countries_I_Subset)
+
+#Subsetting from the tail of the list
+Countries_I_Subset= Countries_I[-3:-1]
+print(Countries_I_Subset)
+
+#Make a list of the 1st 6 countries to join the EU
+EU_Countries = ["Germany", "France", "Belgium", "Netherlands", "Italy", "Luxembourg"]
+EU_Countries.append("EU_Countries")
+print(EU_Countries)
+
+#Extend list names-the next 3 countries to join the EU
+Joined_1973 = ["Denmark", "Ireland", "United Kingdom"]
+EU_Countries.extend(Joined_1973)
+print(EU_Countries)
+
+#Dictionary
+Countries_abbreviation = {"Germany":"Ger", "France":"FRA", "Belgium":"Bel", "Netherlands":"Net", "Italy": "Itl", "Luxembourg":"Lux"}
+print(Countries_abbreviation)
+#adding to Dictionaries
+Countries_abbreviation["Irl"] = "Ireland"
+print(Countries_abbreviation)
+#Accessing Values
+print(Countries_abbreviation["Belgium"])
+
+del(Countries_abbreviation["Germany"])
+
+import pandas as pd
+stocks = pd.read_csv("Microsoft_Stock.csv")
+
+print(stocks.head())
+print(stocks.tail())
 print(stocks.describe())
-print(stocks.dropna())
+print(stocks.dtypes)
 
-#sorting dataframe - you pass a single argument to the method containing the name of the column you want to sort by.
-print(stocks.sort_values("TURNOVER"))
-print(stocks.head(20))
+## Renaming column names and converting the data types
+df = stocks
+df.columns = ["Date", "Open", "High", "Low", "Close", "Volume"]
 
-stocks['DATE']=pd.to_datetime(stocks['DATE'])
-
-
-
-#Dataset - Bank customer
-
-Bank_Customers = pd.read_csv("data.csv")
-
-print(df.head())
-#Count missing values in each column
-missing_values_count = data.isnull().sum()
-print(missing_values_count[0:5])
-
-#Drop rows where data is missing
-droprows= data.dropna()
-print(data.shape,droprows.shape)
-#Drop Colunm where data is missing
-dropcolumns = data.dropna(axis=1)
-print(data.shape,dropcolumns.shape)
-
-#Fill All missing values with 0
-cleaned_data = data.fillna(0)
-#Fill all missing values to the value that comes next in the same column
-cleaned_data = data.fillna(method='bfill', axis=0).fillna(0)
-
-#Drop rows where data is missing
-droprows= data.dropna()
-print(data.shape,droprows.shape)
-
-#Drop Columns where data is missing
-dropcolumns = data.dropna(axis=1)
-print(data.shape,dropcolumns.shape)
-#Fill all missing values with 0
-cleaned_data = data.fillna(0)
-
-#Fill all missing values to the value that comes next in the same column
-cleaned_data = data.fillna(method='bfill', axis=0).fillna(0)
-#Fill all missing values to the value that comes next in the same column
-cleaned_data = data.fillna(method='bfill', axis=0).fillna(0)
-
-#Drop all rows that are duplicates
-drop_duplicates= data.drop_duplicates()
-print(data.shape,drop_duplicates.shape)
-#Drop Duplicate Rows based on specific columns
-
-print(data.shape,drop_duplicates.shape)
-
-
-#New Dataset
-NSE_Banking_Sector = pd.read_csv("NSE_BANKING_SECTOR.csv")
-print(NSE_Banking_Sector)
-
-import matplotlib.pyplot as plt
-fig,ax = plt.subplots()
+#The rotation parameter lets us rotate the labels of the plot
+df.plot(x='Date', y='Close', rot=90, title="Microsoft Stock Price")
 plt.show()
 
-x = NSE_Banking_Sector['volume'].head(5)
-y1 = NSE_Banking_Sector['turnover'].head(5)
-y2 = NSE_Banking_Sector['symbol'].head(5)
-
-ax.plot(x,y1)
-ax.plot(x,y2)
-
-ax.plot(x,y1, marker="v", linestyle="--", color="r")
-import matplotlib.pyplot as plt
-import seaborn as sns
-fig,ax = plt.subplots()
+#Histogram plot is a great way to see the distribution of values.
+df.plot(x='Date', y='Volume', kind='hist', rot=90, title="Microsoft Stock Price")
 plt.show()
 
-seaborn
-sns.lineplot(x=data['video_id'].head(25),
-		y=data['views'].head(25))
+#Sorting - Bank Customer Data
+
+import pandas as pd
+Customer_Data = pd.read_csv("data.csv")
+print(Customer_Data.head())
+print(Customer_Data.shape)
+#Print the row index of Bank Customer Data
+print(Customer_Data.index)
+# Print the column index of homelessness
+print(Customer_Data.columns)
+
+#Index Customer Data by job
+Customer_Data_Ind = Customer_Data.set_index(("job"))
+print(Customer_Data_Ind)
+# Reset the index, keeping its contents
+print(Customer_Data_Ind.reset_index())
+# Reset the index, dropping its contents
+print(Customer_Data_Ind.reset_index(drop=True))
 
 
+
+print(Customer_Data.sort_values("marital"))
+#Sort in Descending order
+print(Customer_Data.sort_values("age", ascending=False))
+# Sort Customer Data by age, then descending Martial Status
+Customer_Data_Age = Customer_Data.sort_values(["age", "marital"], ascending=[True, False])
+print(Customer_Data_Age.head())
+
+#Subsetting just the Education Column
+print(Customer_Data["education"])
+
+#Dropping Duplicates
+import pandas as pd
+Employee_Details = pd.read_csv("current-employee-names-salaries-and-position-titles-1.csv")
+#Checking info, to see if there missing
+print(Employee_Details.info())
+#checking if there are some missing values - Is isnull sum is a function sums missing values
+print(Employee_Details.isnull().sum())
+
+#Drop Columns instead of rows use the axis 1 -
+Missing_Value = Employee_Details.dropna(axis=1)
+print(Employee_Details.shape,Missing_Value.shape)
+print(Employee_Details.shape,Missing_Value.shape)
+
+print(Employee_Details.drop_duplicates(subset="Name"))
+Job_titles = Employee_Details.drop_duplicates(subset=["Name", "Department"])
+print(Job_titles.head())
+
+#If i wanted to fill the missing values i would use the following code -
+Missing_Value = Employee_Details.fillna(Missing_Value.mean)
+#bfill is backword value, fill all missing values to the value that comes next in the same column
+Missing_Value = Employee_Details.fillna(method="bfill", axis=None).fillna(0)
+
+
+#Grouped Summaries
+
+Employee_Details_Dept = Employee_Details.groupby("Job Titles")["Typical Hours"].sum()
+print(Employee_Details_Dept)
+
+Employee_Details_Multiple = Employee_Details.groupby(["Job Titles", "Department"])["Typical Hours"].sum()
+print(Employee_Details_Multiple)
 
 
 
