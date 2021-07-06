@@ -12,6 +12,8 @@ GDP_Data = pd.read_csv('gdp_csv.csv')
 
 print(GDP_Data.head)
 print(GDP_Data.tail)
+#We have the GDP data from 1960 to 2016, The lowest GDP registered was 8,824,447.74
+print(GDP_Data.describe())
 
 #Listing all the countries and regions
 print(GDP_Data["Country Name"].unique())
@@ -35,16 +37,13 @@ print(len(Countries_I_GDP_Data))
 #Subsetting Indonesia
 Countries_I_Subset= Countries_I[2:3]
 print(Countries_I_Subset)
-
 #Subsetting from the tail of the list
 Countries_I_Subset= Countries_I[-3:-1]
 print(Countries_I_Subset)
-
 #Make a list of the 1st 6 countries to join the EU
 EU_Countries = ["Germany", "France", "Belgium", "Netherlands", "Italy", "Luxembourg"]
 EU_Countries.append("EU_Countries")
 print(EU_Countries)
-
 #Extend list names-the next 3 countries to join the EU
 Joined_1973 = ["Denmark", "Ireland", "United Kingdom"]
 EU_Countries.extend(Joined_1973)
@@ -58,7 +57,6 @@ Countries_abbreviation["Irl"] = "Ireland"
 print(Countries_abbreviation)
 #Accessing Values
 print(Countries_abbreviation["Belgium"])
-
 del(Countries_abbreviation["Germany"])
 
 import pandas as pd
@@ -87,6 +85,9 @@ import pandas as pd
 Customer_Data = pd.read_csv("data.csv")
 print(Customer_Data.head())
 print(Customer_Data.shape)
+#correltaion which columns are depenndents on each other
+print(Customer_Data.corr())
+
 #Print the row index of Bank Customer Data
 print(Customer_Data.index)
 # Print the column index of homelessness
@@ -101,7 +102,6 @@ print(Customer_Data_Ind.reset_index())
 print(Customer_Data_Ind.reset_index(drop=True))
 
 
-
 print(Customer_Data.sort_values("marital"))
 #Sort in Descending order
 print(Customer_Data.sort_values("age", ascending=False))
@@ -111,6 +111,7 @@ print(Customer_Data_Age.head())
 
 #Subsetting just the Education Column
 print(Customer_Data["education"])
+
 
 #Dropping Duplicates
 import pandas as pd
@@ -143,11 +144,17 @@ print(Employee_Details_Dept)
 Employee_Details_Multiple = Employee_Details.groupby(["Job Titles", "Department"])["Typical Hours"].sum()
 print(Employee_Details_Multiple)
 
+#Numpy
+import numpy as np
 
+np.array([3.2,4,6,5])
+np.array([1,4,2,5,3])
 
+np.array([1,2,3,4], dtype="str")
+np.array([3,6,2,3], dtype="float32")
+# nested lists result in multidimensional arrays
+np.array([range(i,i+3) for i in [2,4,6]])
 
-
-
-
-
-
+# Create an array filled with a linear sequence
+# Starting at 0, ending at 20, stepping by 2
+np.arange(0,20,2)
