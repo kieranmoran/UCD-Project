@@ -1,5 +1,13 @@
-from datetime import datetime
+import requests
 
+data=requests.get("https://sandbox-b2b.revolut.com/api/1.0")
+parsed_data=data.json()
+print(parsed_data)
+
+
+
+
+from datetime import datetime
 import pandas as pd
 from matplotlib import pyplot as plt
 
@@ -40,6 +48,9 @@ print(Countries_I_Subset)
 #Subsetting from the tail of the list
 Countries_I_Subset= Countries_I[-3:-1]
 print(Countries_I_Subset)
+
+
+
 #Make a list of the 1st 6 countries to join the EU
 EU_Countries = ["Germany", "France", "Belgium", "Netherlands", "Italy", "Luxembourg"]
 EU_Countries.append("EU_Countries")
@@ -137,24 +148,27 @@ Missing_Value = Employee_Details.fillna(method="bfill", axis=None).fillna(0)
 
 
 #Grouped Summaries
-
+# Group by type; calc total weekly sales
 Employee_Details_Dept = Employee_Details.groupby("Job Titles")["Typical Hours"].sum()
 print(Employee_Details_Dept)
 
 Employee_Details_Multiple = Employee_Details.groupby(["Job Titles", "Department"])["Typical Hours"].sum()
 print(Employee_Details_Multiple)
 
+
+
 #Numpy
 import numpy as np
 
-np.array([3.2,4,6,5])
-np.array([1,4,2,5,3])
+import pandas as pd
+Employee_Details = pd.read_csv("current-employee-names-salaries-and-position-titles-1.csv")
 
-np.array([1,2,3,4], dtype="str")
-np.array([3,6,2,3], dtype="float32")
-# nested lists result in multidimensional arrays
-np.array([range(i,i+3) for i in [2,4,6]])
+print(Employee_Details['Annual Salary'].value_counts().head(10))
+print(Employee_Details['Hourly Rate'].value_counts().head(10))
 
-# Create an array filled with a linear sequence
-# Starting at 0, ending at 20, stepping by 2
-np.arange(0,20,2)
+annual_Salary = [90024, 87006, 93354, 48078, 84054, 72510, 96060, 76266, 1000980, 92274]
+
+
+
+
+
