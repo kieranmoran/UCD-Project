@@ -1,11 +1,13 @@
 import requests
+# basics of using a Stock Market API
+Microsoft_Stock=requests.get("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&apikey=1S103UUI8J864BDK")
+print(Microsoft_Stock)
+Stock_Data=Microsoft_Stock.json()
+print(Stock_Data)
+print(Stock_Data["Meta Data"])
 
-data=requests.get("https://sandbox-b2b.revolut.com/api/1.0")
-parsed_data=data.json()
-print(parsed_data)
-
-
-
+Microsoft_Stock_Overview=requests.get("https://www.alphavantage.co/query?function=OVERVIEW&symbol=MSFT&apikey=1S103UUI8J864BDK")
+print(Microsoft_Stock_Overview.status_code)
 
 from datetime import datetime
 import pandas as pd
@@ -124,6 +126,8 @@ print(Customer_Data_Age.head())
 print(Customer_Data["education"])
 
 
+
+
 #Dropping Duplicates
 import pandas as pd
 Employee_Details = pd.read_csv("current-employee-names-salaries-and-position-titles-1.csv")
@@ -166,7 +170,7 @@ Employee_Details = pd.read_csv("current-employee-names-salaries-and-position-tit
 print(Employee_Details['Annual Salary'].value_counts().head(10))
 print(Employee_Details['Hourly Rate'].value_counts().head(10))
 
-annual_Salary = [90024, 87006, 93354, 48078, 84054, 72510, 96060, 76266, 1000980, 92274]
+annual_Salary = [104628, 45720, 52176, 54768, 84054, 72510, 84054, 76266, 1000980, 92274]
 
 
 
