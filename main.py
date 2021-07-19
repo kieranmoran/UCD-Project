@@ -1,87 +1,57 @@
 
-
-Highest_Balance = [102127, 98417, 81204, 71188, 66721]
-#Implmenting_Loops
-
-Education =["secondary", "tertiary", "primary", "unknown"]
-#For Loops
-#For loops iterate over a given sequence
-Highest_Balance = [102127, 98417, 81204, 71188, 66721, 66653, 59649, 58544, 57435]
-for Highest_Balance in [102127, 98417, 81204, 71188, 166721, 66653, 59649, 58544, 57435]:
- print(Highest_Balance)
-
-for Highest_Balance in range(5):
-    print(Highest_Balance)
-
-
-Top_Five = [102127, 98417, 81204, 71188, 66721]
-for Top_Five in [102127, 98417, 81204, 71188, 66721]:
-    if Top_Five == 102127:
-        continue
-print(Top_Five)
-
-
-#While Loops - While loops repeat as long as a certain boolean condition is met
-count = 0
-while count < 100:
-    print(count)
-    count += 10
-
-i = 1
-while i <=10:
-    print(i)
-    i=i+1
-print("Finish")
-
-
+# Import pandas library
+import matplotlib.pyplot as plt
 import pandas as pd
-Customers_Data = pd.read_csv("data.csv")
-#Creating a data Frame
 
-df = pd.DataFrame([["retired", "admin", "blue Collar", "management", "self-employed",
-                    "student", "services", "technician"]])
+# initialize list of lists
+data = [['tom', 10], ['nick', 15], ['juli', 14]]
 
-# Itering over the data frame rows
-# using df.iterrows()
-itr = next(df.iterrows())[1]
-print(itr)
+# Create the pandas DataFrame
+df = pd.DataFrame(data, columns=['Name', 'Age'])
 
 
+months = ["jan", "feb", "mar", "april", "may", "june", "july", "aug", "sept", "oct", "nov", "dec"]
 
 
+GDP_Data = pd.read_csv('gdp_csv.csv')
+def Countryinclude_area_plot(country):
+    # Slice and create the dataframes
+    df_country = df.loc[df['Country Name'] == country]
+    # Starting to plot data from the country
+    x = df_country['Year']
+    y = df_country['Value']
+    plt.stackplot(x, y)
+    plt.title('GDP plot from 1968 to 2016')
+    plt.xlabel('Date')
+    plt.ylabel('GDP value (USD)')
+    plt.legend(loc='best')
 
 
+plot1 = plt.figure(2)
 
+Countries = ["Germany", "France", "Belgium", "Netherlands", "Italy", "Luxembourg"]
+Values = [1.237255e+12, 1.858913e+12, 2.465454e+12, 3.477796e+12, 1.953051e+11, 4.713644e+11]
 
+explode = (0.1, 0.1, 0.1, 0.1, 0.1, 0.1)
+plt.pie(Values, labels=Countries,
+        shadow=True,
+        explode=explode,  # to have the pie open.
+        autopct='%1.0f%%',
+        pctdistance=0.8,
+        startangle=90)
+plt.title('1st 6 countries to join the EU')
+plt.show()
 
-
+GDP_Data['Date'] = pd.to_datetime(GDP_Data.Year, format='%Y')
+GDP_Data.set_index('Date', inplace=True)
+GDP_Data = GDP_Data.loc[GDP_Data["Country Name"] == "Ireland"]
+GDP_Data.head()
+print(GDP_Data)
 
 import pandas as pd
 Employee_Details = pd.read_csv("current-employee-names-salaries-and-position-titles-1.csv")
 
-
-
 Highest_Balance = [102127, 98417, 81204, 71188, 66721, 66653, 59649, 58544, 57435]
 
 
-#Asking what Arraon works at age 50
-def name_age(name, age):
-     print("What does " + name + " work at age " + age)
-
-name_age("AAron Jeffery", "50")
-
-def Annual_Salary(num):
-    return num*num
-
-result = Annual_Salary(316)
-print(result)
-
-#Example of a simple sum function
-def sum(a, b):
-    return a + b
-
-total=sum(10, 20)
-print(total)
-total=sum(5, sum(10, 20))
-print(total)
 

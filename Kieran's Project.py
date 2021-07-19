@@ -51,8 +51,6 @@ print(Countries_I_Subset)
 Countries_I_Subset= Countries_I[-3:-1]
 print(Countries_I_Subset)
 
-
-
 #Make a list of the 1st 6 countries to join the EU
 EU_Countries = ["Germany", "France", "Belgium", "Netherlands", "Italy", "Luxembourg"]
 EU_Countries.append("EU_Countries")
@@ -91,7 +89,6 @@ plt.show()
 #Histogram plot is a great way to see the distribution of values.
 df.plot(x='Date', y='Volume', kind='hist', rot=90, title="Microsoft Stock Price")
 plt.show()
-
 #Sorting - Bank Customer Data
 
 import pandas as pd
@@ -124,8 +121,6 @@ print(Customer_Data_Age.head())
 
 #Subsetting just the Education Column
 print(Customer_Data["education"])
-
-
 
 
 #Dropping Duplicates
@@ -213,4 +208,68 @@ annual_salary_array = np.array(Annual_Salary)
 print(np.mean(annual_salary_array))
 print(np.std(annual_salary_array))
 
+Highest_Balance = [102127, 98417, 81204, 71188, 66721]
+#Implmenting_Loops
 
+Education =["secondary", "tertiary", "primary", "unknown"]
+#For Loops
+#For loops iterate over a given sequence
+Highest_Balance = [102127, 98417, 81204, 71188, 66721, 66653, 59649, 58544, 57435]
+for Highest_Balance in [102127, 98417, 81204, 71188, 166721, 66653, 59649, 58544, 57435]:
+ print(Highest_Balance)
+
+for Highest_Balance in range(5):
+    print(Highest_Balance)
+
+
+Top_Five = [102127, 98417, 81204, 71188, 66721]
+for Top_Five in [102127, 98417, 81204, 71188, 66721]:
+    if Top_Five == 102127:
+        continue
+print(Top_Five)
+
+
+#While Loops - While loops repeat as long as a certain boolean condition is met
+count = 0
+while count < 100:
+    print(count)
+    count += 10
+
+i = 1
+while i <=10:
+    print(i)
+    i=i+1
+print("Finish")
+
+import pandas as pd
+Customers_Data = pd.read_csv("data.csv")
+#Creating a data Frame
+
+df = pd.DataFrame([["retired", "admin", "blue Collar", "management", "self-employed",
+                    "student", "services", "technician"]])
+
+# Itering over the data frame rows
+# using df.iterrows()
+itr = next(df.iterrows())[1]
+print(itr)
+
+#Asking what Arraon works at age 50
+def name_age(name, age):
+     print("What does " + name + " work at age " + age)
+
+name_age("AAron Jeffery", "50")
+
+def Annual_Salary(num):
+    return num*num
+
+result = Annual_Salary(316)
+print(result)
+
+#Example of a simple sum function
+def sum(a, b):
+    return a + b
+
+total=sum(10, 20)
+print(total)
+total=sum(5, sum(10, 20))
+print(total)
