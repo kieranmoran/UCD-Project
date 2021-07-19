@@ -1,6 +1,7 @@
 
 # Import pandas library
 import matplotlib.pyplot as plt
+import pandas
 import pandas as pd
 
 # initialize list of lists
@@ -54,4 +55,18 @@ Employee_Details = pd.read_csv("current-employee-names-salaries-and-position-tit
 Highest_Balance = [102127, 98417, 81204, 71188, 66721, 66653, 59649, 58544, 57435]
 
 
+#Merging Dataframes
+Employee_Details_Dept = pd.DataFrame({'Name': ['Mike', 'Michelle', 'James', 'Dennis', "David"],
+                    'Department': ['Fire', 'Police', 'Human Resources', 'Finance', "Law"]})
+Employee_Details_Salary = pd.DataFrame({'Name': ['Michelle', "Mike", 'Dennis', 'David', "James", ],
+                    'Salary': [100656, 100776, 99648, 99780, 98592]})
 
+inner_merged = pd.merge(Employee_Details_Dept, Employee_Details_Salary)
+print(inner_merged)
+
+concatenated = pandas.concat([Employee_Details_Dept, Employee_Details_Salary], axis=1)
+print(concatenated)
+
+#merge() for combining data on common columns or indices
+#join() for combining data on a key column or an index
+#concat() for combining DataFrames across rows or columns

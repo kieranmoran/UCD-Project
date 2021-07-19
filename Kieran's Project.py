@@ -208,6 +208,23 @@ annual_salary_array = np.array(Annual_Salary)
 print(np.mean(annual_salary_array))
 print(np.std(annual_salary_array))
 
+#Merging Dataframes
+Employee_Details_Dept = pd.DataFrame({'Name': ['Mike', 'Michelle', 'James', 'Dennis', "David"],
+                    'Department': ['Fire', 'Police', 'Human Resources', 'Finance', "Law"]})
+Employee_Details_Salary = pd.DataFrame({'Name': ['Michelle', "Mike", 'Dennis', 'David', "James", ],
+                    'Salary': [100656, 100776, 99648, 99780, 98592]})
+
+inner_merged = pd.merge(Employee_Details_Dept, Employee_Details_Salary)
+print(inner_merged)
+
+concatenated = pandas.concat([Employee_Details_Dept, Employee_Details_Salary], axis=1)
+print(concatenated)
+
+#merge() for combining data on common columns or indices
+#join() for combining data on a key column or an index
+#concat() for combining DataFrames across rows or columns
+
+
 Highest_Balance = [102127, 98417, 81204, 71188, 66721]
 #Implmenting_Loops
 
@@ -273,3 +290,5 @@ total=sum(10, 20)
 print(total)
 total=sum(5, sum(10, 20))
 print(total)
+
+
