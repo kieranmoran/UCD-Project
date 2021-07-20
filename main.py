@@ -30,11 +30,11 @@ def Countryinclude_area_plot(country):
 
 plot1 = plt.figure(2)
 
-Countries = ["Germany", "France", "Belgium", "Netherlands", "Italy", "Luxembourg"]
+Countries_EU = ["Germany", "France", "Belgium", "Netherlands", "Italy", "Luxembourg"]
 Values = [1.237255e+12, 1.858913e+12, 2.465454e+12, 3.477796e+12, 1.953051e+11, 4.713644e+11]
 
 explode = (0.1, 0.1, 0.1, 0.1, 0.1, 0.1)
-plt.pie(Values, labels=Countries,
+plt.pie(Values, labels=Countries_EU,
         shadow=True,
         explode=explode,  # to have the pie open.
         autopct='%1.0f%%',
@@ -49,24 +49,54 @@ GDP_Data = GDP_Data.loc[GDP_Data["Country Name"] == "Ireland"]
 GDP_Data.head()
 print(GDP_Data)
 
-import pandas as pd
-Employee_Details = pd.read_csv("current-employee-names-salaries-and-position-titles-1.csv")
 
-Highest_Balance = [102127, 98417, 81204, 71188, 66721, 66653, 59649, 58544, 57435]
+Population_2020 = pd.read_csv('population_by_country_2020.csv')
+
+Countries = ["China", "India", "United States", "Indonesia", "Pakstan"]
+total_populations = [1438207241, 1377233523, 330610570, 272931713, 219992900,]
+
+plt.plot(Countries, total_populations)
+plt.title("Countries vs Population in 2020")
+plt.xlabel("total_population")
+plt.ylabel("Countries")
+plt.show()
+
+import matplotlib.pyplot as plt
+
+Median_Age = [38, 28, 38, 30, 23,]
+Countries = ["China", "India", "United States", "Indonesia", "Pakistan"]
+
+plt.scatter(Median_Age, Countries)
+plt.title("Median Age of Highest Population")
+plt.xlabel("Median Age")
+plt.ylabel("Highest Population")
+plt.show()
 
 
-#Merging Dataframes
-Employee_Details_Dept = pd.DataFrame({'Name': ['Mike', 'Michelle', 'James', 'Dennis', "David"],
-                    'Department': ['Fire', 'Police', 'Human Resources', 'Finance', "Law"]})
-Employee_Details_Salary = pd.DataFrame({'Name': ['Michelle', "Mike", 'Dennis', 'David', "James", ],
-                    'Salary': [100656, 100776, 99648, 99780, 98592]})
+import matplotlib.pyplot as plt
 
-inner_merged = pd.merge(Employee_Details_Dept, Employee_Details_Salary)
-print(inner_merged)
+Fertility_rate = [1.7, 2.2, 1.8, 2.3, 3.6,]
 
-concatenated = pandas.concat([Employee_Details_Dept, Employee_Details_Salary], axis=1)
-print(concatenated)
+plt.hist(Fertility_rate, bins = 3)
+plt.xlabel("Number")
+plt.ylabel("Frequency")
+plt.show()
 
-#merge() for combining data on common columns or indices
-#join() for combining data on a key column or an index
-#concat() for combining DataFrames across rows or columns
+# Our data
+Countries = ["China", "India", "United States", "Indonesia", "Pakistan"]
+Urban_Population = [61, 35, 83, 56, 35]
+
+# Generating the y positions. Later, we'll use them to replace them with labels.
+y_positions = range(len(Countries))
+
+# Creating our bar plot
+plt.bar(y_positions, Urban_Population)
+plt.xticks(y_positions, Countries)
+plt.ylabel("Urban Population (%)")
+plt.title("Urban Population Percentage")
+plt.show()
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+fig,ax = plt.subplots
+plt.show()

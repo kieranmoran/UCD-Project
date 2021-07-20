@@ -1,3 +1,4 @@
+import pandas
 import requests
 # basics of using a Stock Market API
 Microsoft_Stock=requests.get("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&apikey=1S103UUI8J864BDK")
@@ -69,6 +70,27 @@ print(Countries_abbreviation)
 #Accessing Values
 print(Countries_abbreviation["Belgium"])
 del(Countries_abbreviation["Germany"])
+
+#Showed a simple matplot lib chart using marker & linestyle
+import matplotlib.pyplot as plt
+fix,ax=plt.subplots()
+x = ["Germany", "France", "Belgium", "Netherlands", "Italy", "Luxembourg"]
+y = [1.237255e+12, 1.858913e+12, 2.465454e+12, 3.477796e+12, 1.953051e+11, 4.713644e+11]
+ax.plot(x,y, color="skyblue", linestyle="--", marker="*")
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import pandas as pd
 stocks = pd.read_csv("Microsoft_Stock.csv")
@@ -290,5 +312,4 @@ total=sum(10, 20)
 print(total)
 total=sum(5, sum(10, 20))
 print(total)
-
 
