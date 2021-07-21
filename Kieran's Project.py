@@ -1,6 +1,6 @@
 import pandas
 import requests
-# basics of using a Stock Market API
+
 Microsoft_Stock=requests.get("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&apikey=1S103UUI8J864BDK")
 print(Microsoft_Stock)
 Stock_Data=Microsoft_Stock.json()
@@ -10,14 +10,13 @@ print(Stock_Data["Meta Data"])
 Microsoft_Stock_Overview=requests.get("https://www.alphavantage.co/query?function=OVERVIEW&symbol=MSFT&apikey=1S103UUI8J864BDK")
 print(Microsoft_Stock_Overview.status_code)
 
-from datetime import datetime
-import pandas as pd
-from matplotlib import pyplot as plt
-
 # Date and time now
 import datetime
 now = datetime.datetime.now()
 print(now)
+
+import pandas as pd
+from matplotlib import pyplot as plt
 
 GDP_Data = pd.read_csv('gdp_csv.csv')
 
@@ -36,7 +35,7 @@ print(Ireland)
 #Shape
 print(GDP_Data.shape)
 
-Ireland.plot(x="Year", y="Value", kind="line")
+Ireland.plot(x="Year", y="Value", kind="line", title="Ireland GDP")
 plt.show()
 
 #Creating Lists
@@ -79,19 +78,6 @@ y = [1.237255e+12, 1.858913e+12, 2.465454e+12, 3.477796e+12, 1.953051e+11, 4.713
 ax.plot(x,y, color="skyblue", linestyle="--", marker="*")
 plt.show()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 import pandas as pd
 stocks = pd.read_csv("Microsoft_Stock.csv")
 
@@ -104,13 +90,12 @@ print(stocks.dtypes)
 df = stocks
 df.columns = ["Date", "Open", "High", "Low", "Close", "Volume"]
 
-#The rotation parameter lets us rotate the labels of the plot
 df.plot(x='Date', y='Close', rot=90, title="Microsoft Stock Price")
 plt.show()
 
-#Histogram plot is a great way to see the distribution of values.
 df.plot(x='Date', y='Volume', kind='hist', rot=90, title="Microsoft Stock Price")
 plt.show()
+
 #Sorting - Bank Customer Data
 
 import pandas as pd
@@ -122,7 +107,7 @@ print(Customer_Data.corr())
 
 #Print the row index of Bank Customer Data
 print(Customer_Data.index)
-# Print the column index of homelessness
+
 print(Customer_Data.columns)
 
 #Index Customer Data by job
@@ -130,9 +115,8 @@ Customer_Data_Ind = Customer_Data.set_index(("job"))
 print(Customer_Data_Ind)
 # Reset the index, keeping its contents
 print(Customer_Data_Ind.reset_index())
-# Reset the index, dropping its contents
-print(Customer_Data_Ind.reset_index(drop=True))
 
+print(Customer_Data_Ind.reset_index(drop=True))
 
 print(Customer_Data.sort_values("marital"))
 #Sort in Descending order
@@ -143,6 +127,16 @@ print(Customer_Data_Age.head())
 
 #Subsetting just the Education Column
 print(Customer_Data["education"])
+
+#Creating a data Frame
+
+df = pd.DataFrame([["retired", "admin", "blue Collar", "management", "self-employed",
+                    "student", "services", "technician"]])
+
+# Itering over the data frame rows
+# using df.iterrows()
+itr = next(df.iterrows())[1]
+print(itr)
 
 
 #Dropping Duplicates
@@ -162,11 +156,9 @@ print(Employee_Details.drop_duplicates(subset="Name"))
 Job_titles = Employee_Details.drop_duplicates(subset=["Name", "Department"])
 print(Job_titles.head())
 
-#If i wanted to fill the missing values i would use the following code -
 Missing_Value = Employee_Details.fillna(Missing_Value.mean)
-#bfill is backword value, fill all missing values to the value that comes next in the same column
-Missing_Value = Employee_Details.fillna(method="bfill", axis=None).fillna(0)
 
+Missing_Value = Employee_Details.fillna(method="bfill", axis=None).fillna(0)
 
 #Grouped Summaries
 # Group by type; calc total weekly sales
@@ -175,8 +167,6 @@ print(Employee_Details_Dept)
 
 Employee_Details_Multiple = Employee_Details.groupby(["Job Titles", "Department"])["Typical Hours"].sum()
 print(Employee_Details_Multiple)
-
-
 
 #Numpy
 import numpy as np
@@ -197,7 +187,6 @@ print(type(a))
 array_a = np.array([1, 2, 3, 4])
 array_b = np.array([9, 10, 11, 12])
 print(array_a + array_b)
-
 
 #Two dimensional arrays
 #Using customer data to get the total balance by month
@@ -239,18 +228,14 @@ Employee_Details_Salary = pd.DataFrame({'Name': ['Michelle', "Mike", 'Dennis', '
 inner_merged = pd.merge(Employee_Details_Dept, Employee_Details_Salary)
 print(inner_merged)
 
-concatenated = pandas.concat([Employee_Details_Dept, Employee_Details_Salary], axis=1)
+concatenated = pd.concat([Employee_Details_Dept, Employee_Details_Salary], axis=1)
 print(concatenated)
-
-#merge() for combining data on common columns or indices
-#join() for combining data on a key column or an index
-#concat() for combining DataFrames across rows or columns
-
 
 Highest_Balance = [102127, 98417, 81204, 71188, 66721]
 #Implmenting_Loops
 
 Education =["secondary", "tertiary", "primary", "unknown"]
+
 #For Loops
 #For loops iterate over a given sequence
 Highest_Balance = [102127, 98417, 81204, 71188, 66721, 66653, 59649, 58544, 57435]
@@ -267,7 +252,6 @@ for Top_Five in [102127, 98417, 81204, 71188, 66721]:
         continue
 print(Top_Five)
 
-
 #While Loops - While loops repeat as long as a certain boolean condition is met
 count = 0
 while count < 100:
@@ -279,18 +263,6 @@ while i <=10:
     print(i)
     i=i+1
 print("Finish")
-
-import pandas as pd
-Customers_Data = pd.read_csv("data.csv")
-#Creating a data Frame
-
-df = pd.DataFrame([["retired", "admin", "blue Collar", "management", "self-employed",
-                    "student", "services", "technician"]])
-
-# Itering over the data frame rows
-# using df.iterrows()
-itr = next(df.iterrows())[1]
-print(itr)
 
 #Asking what Arraon works at age 50
 def name_age(name, age):
