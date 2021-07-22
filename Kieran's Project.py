@@ -1,4 +1,3 @@
-import pandas
 import requests
 
 Microsoft_Stock=requests.get("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&apikey=1S103UUI8J864BDK")
@@ -19,6 +18,8 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 GDP_Data = pd.read_csv('gdp_csv.csv')
+#checking if there are some missing values
+print(GDP_Data.isnull().sum())
 
 print(GDP_Data.head)
 print(GDP_Data.tail)
@@ -75,35 +76,38 @@ import matplotlib.pyplot as plt
 fix,ax=plt.subplots()
 x = ["Germany", "France", "Belgium", "Netherlands", "Italy", "Luxembourg"]
 y = [1.237255e+12, 1.858913e+12, 2.465454e+12, 3.477796e+12, 1.953051e+11, 4.713644e+11]
-ax.plot(x,y, color="skyblue", linestyle="--", marker="*")
+ax.plot(x,y, color="green", linestyle="--", marker="*")
 plt.show()
 
-import pandas as pd
 stocks = pd.read_csv("Microsoft_Stock.csv")
 
-print(stocks.head())
-print(stocks.tail())
+print(stocks.head(10))
+print(stocks.tail(10))
 print(stocks.describe())
 print(stocks.dtypes)
+print(stocks.info)
 
 ## Renaming column names and converting the data types
-df = stocks
-df.columns = ["Date", "Open", "High", "Low", "Close", "Volume"]
+Stocks_df = stocks
+Stocks_df.columns = ["Date", "Open", "High", "Low", "Close", "Volume"]
 
-df.plot(x='Date', y='Close', rot=90, title="Microsoft Stock Price")
+Stocks_df.plot(x='Date', y='Close', rot=90, title="Microsoft Stock Price")
 plt.show()
 
-df.plot(x='Date', y='Volume', kind='hist', rot=90, title="Microsoft Stock Price")
+Stocks_df.plot(x='Date', y='Volume', kind='hist', rot=90, title="Microsoft Stock Price")
 plt.show()
 
-#Sorting - Bank Customer Data
+#sorting dataframe - you pass a single argument to the method containing the name of the column you want to sort by.
+print(stocks.sort_values("Volume"))
+print(stocks.head(20))
 
-import pandas as pd
 Customer_Data = pd.read_csv("data.csv")
 print(Customer_Data.head())
 print(Customer_Data.shape)
 #correltaion which columns are depenndents on each other
 print(Customer_Data.corr())
+
+print(Customer_Data.isnull().sum())
 
 #Print the row index of Bank Customer Data
 print(Customer_Data.index)
@@ -130,17 +134,16 @@ print(Customer_Data["education"])
 
 #Creating a data Frame
 
-df = pd.DataFrame([["retired", "admin", "blue Collar", "management", "self-employed",
+Job = pd.DataFrame([["retired", "admin", "blue Collar", "management", "self-employed",
                     "student", "services", "technician"]])
 
 # Itering over the data frame rows
 # using df.iterrows()
-itr = next(df.iterrows())[1]
+itr = next(Job.iterrows())[1]
 print(itr)
 
-
 #Dropping Duplicates
-import pandas as pd
+
 Employee_Details = pd.read_csv("current-employee-names-salaries-and-position-titles-1.csv")
 #Checking info, to see if there missing
 print(Employee_Details.info())
@@ -151,6 +154,9 @@ print(Employee_Details.isnull().sum())
 Missing_Value = Employee_Details.dropna(axis=1)
 print(Employee_Details.shape,Missing_Value.shape)
 print(Employee_Details.shape,Missing_Value.shape)
+
+droprows= Employee_Details.dropna()
+print(Employee_Details.shape,droprows.shape)
 
 print(Employee_Details.drop_duplicates(subset="Name"))
 Job_titles = Employee_Details.drop_duplicates(subset=["Name", "Department"])
@@ -168,16 +174,16 @@ print(Employee_Details_Dept)
 Employee_Details_Multiple = Employee_Details.groupby(["Job Titles", "Department"])["Typical Hours"].sum()
 print(Employee_Details_Multiple)
 
-#Numpy
-import numpy as np
-
-import pandas as pd
 Employee_Details = pd.read_csv("current-employee-names-salaries-and-position-titles-1.csv")
+print(Employee_Details.head())
+print(Employee_Details.isnull().sum())
 
 print(Employee_Details['Annual Salary'].value_counts().head(10))
 print(Employee_Details['Hourly Rate'].value_counts().head(10))
 
 annual_Salary = [104628, 45720, 52176, 54768, 84054, 72510, 84054, 76266, 1000980, 92274]
+annual_Salary.sort()
+print(annual_Salary)
 
 import numpy as np
 a = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
@@ -190,7 +196,7 @@ print(array_a + array_b)
 
 #Two dimensional arrays
 #Using customer data to get the total balance by month
-import numpy as np
+
 Months = ["Feb", "Mar", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
 Total_Balance = [13790, 6379, 161861, 364772, 188432, 142142, 397764, 91608, 238760, 332773, 83141]
 
@@ -205,14 +211,18 @@ indexing_array = np.array([2, 5, 5])
 months_subset = months_array[indexing_array]
 print(months_subset)
 
-import pandas as pd
+Total_Balance_std = np.std(Total_Balance)
+print(Total_Balance_std)
+Total_Balance_mean = np.mean(Total_Balance)
+print(Total_Balance_mean)
+
 Employee_Details = pd.read_csv("current-employee-names-salaries-and-position-titles-1.csv")
+print(Employee_Details.info())
 
 print(Employee_Details['Annual Salary'].value_counts().head(10))
 print(Employee_Details['Hourly Rate'].value_counts().head(10))
 print(len(Employee_Details))
 
-import numpy as np
 Annual_Salary = [90024, 87006, 93354, 48078, 84054, 72510, 96060, 76266, 1000980, 92274]
 annual_salary_array = np.array(Annual_Salary)
 #Calculating the mean of an inputt
@@ -284,4 +294,42 @@ total=sum(10, 20)
 print(total)
 total=sum(5, sum(10, 20))
 print(total)
+
+
+Population_2020 = pd.read_csv('population_by_country_2020.csv')
+
+Countries = ["China", "India", "United States", "Indonesia", "Pakstan"]
+total_populations = [1438207241, 1377233523, 330610570, 272931713, 219992900,]
+
+plt.plot(Countries, total_populations)
+plt.title("Countries vs Population in 2020")
+plt.xlabel("Countries")
+plt.ylabel("total_population")
+plt.show()
+
+import matplotlib.pyplot as plt
+
+Median_Age = [38, 28, 38, 30, 23,]
+Countries = ["China", "India", "United States", "Indonesia", "Pakistan"]
+
+plt.scatter(Median_Age, Countries)
+plt.title("Median Age of Highest Population")
+plt.xlabel("Median Age")
+plt.ylabel("Highest Population")
+plt.show()
+
+
+Fertility_rate = [1.7, 2.2, 1.8, 2.3, 3.6,]
+
+plt.hist(Fertility_rate, bins = 3)
+plt.xlabel("Number")
+plt.ylabel("Frequency")
+plt.show()
+
+# Our data
+Countries = ["China", "India", "United States", "Indonesia", "Pakistan"]
+Urban_Population = [61, 35, 83, 56, 35]
+
+# Generating the y positions. Later, we'll use them to replace them with labels.
+y_positions = range(len(Countries))
 
