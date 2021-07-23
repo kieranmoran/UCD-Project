@@ -1,4 +1,5 @@
 import requests
+import sns as sns
 
 Microsoft_Stock=requests.get("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&apikey=1S103UUI8J864BDK")
 print(Microsoft_Stock)
@@ -37,6 +38,8 @@ print(Ireland)
 print(GDP_Data.shape)
 
 Ireland.plot(x="Year", y="Value", kind="line", title="Ireland GDP")
+plt.ylabel("Value")
+plt.xlabel("Year")
 plt.show()
 
 #Creating Lists
@@ -72,11 +75,19 @@ print(Countries_abbreviation["Belgium"])
 del(Countries_abbreviation["Germany"])
 
 #Showed a simple matplot lib chart using marker & linestyle
-import matplotlib.pyplot as plt
+
 fix,ax=plt.subplots()
 x = ["Germany", "France", "Belgium", "Netherlands", "Italy", "Luxembourg"]
-y = [1.237255e+12, 1.858913e+12, 2.465454e+12, 3.477796e+12, 1.953051e+11, 4.713644e+11]
-ax.plot(x,y, color="green", linestyle="--", marker="*")
+y_1980 = [946695355820, 703525302701, 127508202372, 192661371425, 475682506443, 6232005656]
+x2 = ["Germany", "France", "Belgium", "Netherlands", "Italy", "Luxembourg"]
+y2_2000 = [1949953934033, 1368438363736, 237904919845, 412807259996, 1141759996314, 21263514833]
+
+
+ax.plot(x,y_1980, color="green", linestyle="--", marker="*")
+ax.plot(x2,y2_2000, color="blue", linestyle="--", marker="*")
+plt.title("GDP Difference from the year 1980 and 2000")
+plt.ylabel("Values")
+plt.xlabel("Countries")
 plt.show()
 
 stocks = pd.read_csv("Microsoft_Stock.csv")
@@ -91,10 +102,15 @@ print(stocks.info)
 Stocks_df = stocks
 Stocks_df.columns = ["Date", "Open", "High", "Low", "Close", "Volume"]
 
-Stocks_df.plot(x='Date', y='Close', rot=90, title="Microsoft Stock Price")
+import seaborn as sns
+
+stocks = pd.read_csv("Microsoft_Stock.csv")
+plt.figure(figsize=(12, 6))
+sns.histplot(y=stocks["Volume"].head(5), x=stocks["Date"].head(5))
+plt.title("Microsoft Stock Volume - Top 5")
 plt.show()
 
-Stocks_df.plot(x='Date', y='Volume', kind='hist', rot=90, title="Microsoft Stock Price")
+Stocks_df.plot(x='Date', y='Close', kind='hist', rot=90, title="Microsoft Stock Price")
 plt.show()
 
 #sorting dataframe - you pass a single argument to the method containing the name of the column you want to sort by.
@@ -255,7 +271,6 @@ for Highest_Balance in [102127, 98417, 81204, 71188, 166721, 66653, 59649, 58544
 for Highest_Balance in range(5):
     print(Highest_Balance)
 
-
 Top_Five = [102127, 98417, 81204, 71188, 66721]
 for Top_Five in [102127, 98417, 81204, 71188, 66721]:
     if Top_Five == 102127:
@@ -301,16 +316,14 @@ Population_2020 = pd.read_csv('population_by_country_2020.csv')
 Countries = ["China", "India", "United States", "Indonesia", "Pakstan"]
 total_populations = [1438207241, 1377233523, 330610570, 272931713, 219992900,]
 
-plt.plot(Countries, total_populations)
+plt.bar(Countries, total_populations)
 plt.title("Countries vs Population in 2020")
 plt.xlabel("Countries")
 plt.ylabel("total_population")
 plt.show()
 
-import matplotlib.pyplot as plt
-
-Median_Age = [38, 28, 38, 30, 23,]
-Countries = ["China", "India", "United States", "Indonesia", "Pakistan"]
+Median_Age = [38, 28, 38, 30, 23, 33, 18, 28, 40, 29]
+Countries = ["China", "India", "United States", "Indonesia", "Pakistan", "Brazil", "Nigeria", "Bangladesh", "Russia", "Mexico"]
 
 plt.scatter(Median_Age, Countries)
 plt.title("Median Age of Highest Population")
@@ -318,10 +331,10 @@ plt.xlabel("Median Age")
 plt.ylabel("Highest Population")
 plt.show()
 
-
 Fertility_rate = [1.7, 2.2, 1.8, 2.3, 3.6,]
 
 plt.hist(Fertility_rate, bins = 3)
+plt.title("Fertility Rate")
 plt.xlabel("Number")
 plt.ylabel("Frequency")
 plt.show()
@@ -330,6 +343,12 @@ plt.show()
 Countries = ["China", "India", "United States", "Indonesia", "Pakistan"]
 Urban_Population = [61, 35, 83, 56, 35]
 
-# Generating the y positions. Later, we'll use them to replace them with labels.
+
 y_positions = range(len(Countries))
 
+import seaborn as sns
+import matplotlib.pyplot as plt
+Population_2020 = pd.read_csv('population_by_country_2020.csv')
+plt.figure(figsize=(16, 8))
+sns.boxplot(y=Population_2020['Migrants (net)'], x=Population_2020['Med. Age'])
+plt.show()
